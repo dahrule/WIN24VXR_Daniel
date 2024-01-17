@@ -1,39 +1,64 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HitTarget : MonoBehaviour
 {
-    [SerializeField] protected int score = 1;
+    [SerializeField] protected int baseScore = 1;
 
-    protected virtual int CalculateScore()
-    {
-        Debug.Log("Gained: " + score, this.gameObject);
-        return score;
-    }
-    
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected TextMeshProUGUI gainScoreUI;
 
-    
-    protected void Update()
+    protected void Start()
+    {
+        //Update UI
+        if (gainScoreUI != null)
+        {
+            gainScoreUI.text = "";
+        }  
+    }
+   
+    protected virtual void Update()
     {
         TestHitTarget(); 
     }
 
-    void TestHitTarget()
+    protected virtual int CalculateScore()
+    {
+        return baseScore;
+    }
+
+    public virtual void TakeHit(int hitpower)
+    {
+        int gainScore = CalculateScore();
+        UpdateUI(gainScore);
+
+        Invoke(nameof(Destroy), 1f); //Call Remove Method after 1 seconds.
+
+    }
+
+    private void UpdateUI(int gainScore)
+    {
+        //UpdateUI
+        if (gainScoreUI != null)
+        {
+            gainScoreUI.text = "+" + gainScore.ToString();
+        }
+    }
+
+    protected void Destroy()
+    {
+        Destroy(gameObject);
+    }
+
+    private void TestHitTarget()
     {
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if(Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit))
             {
-                
-                if(hit.collider.TryGetComponent<HitTarget>(out HitTarget hitTarget))
+
+                if (hit.collider.TryGetComponent<HitTarget>(out HitTarget hitTarget))
                 {
                     hitTarget.TakeHit(1);
                 }
@@ -41,8 +66,5 @@ public class HitTarget : MonoBehaviour
         }
     }
 
-    public virtual void TakeHit(int hitpower)
-    {
-        int gainScore=CalculateScore();
-    }
 }
+
