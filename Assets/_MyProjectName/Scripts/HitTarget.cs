@@ -28,11 +28,9 @@ public class HitTarget : MonoBehaviour
 
     public virtual void TakeHit(int hitpower)
     {
-        int gainScore = CalculateScore();
-        UpdateUI(gainScore);
-
-        Invoke(nameof(Destroy), 1f); //Call Remove Method after 1 seconds.
-
+        int scoreGain = CalculateScore();
+        UpdateUI(scoreGain);
+        Invoke(nameof(Destroy), 1f);
     }
 
     private void UpdateUI(int gainScore)
