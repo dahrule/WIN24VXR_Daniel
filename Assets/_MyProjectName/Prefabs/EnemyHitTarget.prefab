@@ -147,9 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45018d94e33d321449a268faf2448210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 1
+  baseScore: 1
   gainScoreUI: {fileID: 4301801022150021667}
-  hitsToDestroy: 2
+  hitsToDestroy: 3
+  playerTarget: {fileID: 0}
+  moveSpeed: 1
 --- !u!1 &3201477165397223796
 GameObject:
   m_ObjectHideFlags: 0

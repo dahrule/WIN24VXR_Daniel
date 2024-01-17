@@ -8,7 +8,8 @@ public class EnemyHitTarget : HitTarget
 {
     [SerializeField] int hitsToDestroy = 1;
     [SerializeField] Transform playerTarget;
-    [SerializeField] float moveSpeed = 1;
+    [SerializeField] float moveSpeed = 1f;
+    [SerializeField] float attackRate = 3f;
 
     private int currentHits = 0;
 
@@ -35,6 +36,11 @@ public class EnemyHitTarget : HitTarget
         //TODO: fix jittering when reaching target, test if the distance is smaller than a stop distance.
     }
 
+    private void Attack()
+    {
+        Debug.Log(this.gameObject.name + " is Attacking Player",this.gameObject);
+    }
+
     public override void TakeHit(int hitpower)
     {
         currentHits += hitpower;
@@ -42,5 +48,15 @@ public class EnemyHitTarget : HitTarget
         {
             base.TakeHit(hitpower);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            InvokeRepeating(nameof(Attack), 1f, attackRate);
+        }
+
     }
 }

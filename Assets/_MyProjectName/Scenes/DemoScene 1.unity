@@ -561,9 +561,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1977654135}
+  - component: {fileID: 1977654136}
   m_Layer: 2
   m_Name: PlayerTarget
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,6 +584,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 116426334}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1977654136
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977654134}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2612940475927725385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -643,8 +667,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1002350412400501494, guid: 6970561751d0679438666ee095abaae5,
         type: 3}
-      propertyPath: moveSpeed
-      value: 1
+      propertyPath: baseScore
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002350412400501494, guid: 6970561751d0679438666ee095abaae5,
+        type: 3}
+      propertyPath: attackRate
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1002350412400501494, guid: 6970561751d0679438666ee095abaae5,
         type: 3}
