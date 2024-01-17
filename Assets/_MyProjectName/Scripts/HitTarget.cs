@@ -30,6 +30,10 @@ public class HitTarget : MonoBehaviour
     {
         int scoreGain = CalculateScore();
         UpdateUI(scoreGain);
+
+        gameObject.GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
+
         Invoke(nameof(Destroy), 1f);
     }
 
@@ -42,7 +46,7 @@ public class HitTarget : MonoBehaviour
         }
     }
 
-    protected void Destroy()
+    protected virtual void Destroy()
     {
         Destroy(gameObject);
     }

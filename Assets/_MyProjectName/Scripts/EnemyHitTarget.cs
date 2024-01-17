@@ -13,6 +13,13 @@ public class EnemyHitTarget : HitTarget
 
     private int currentHits = 0;
 
+    protected void Awake()
+    {
+        if (playerTarget == null)
+        {
+            playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+    }
 
     protected override void Update()
     {

@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: e0b641f6f4ae50e46b27fd325c29b351, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -147,11 +147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45018d94e33d321449a268faf2448210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseScore: 1
+  baseScore: 2
   gainScoreUI: {fileID: 4301801022150021667}
-  hitsToDestroy: 3
+  hitsToDestroy: 1
   playerTarget: {fileID: 0}
   moveSpeed: 1
+  attackRate: 3
 --- !u!1 &3201477165397223796
 GameObject:
   m_ObjectHideFlags: 0
