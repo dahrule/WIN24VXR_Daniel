@@ -4,27 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
+/// <summary>
+/// An EnemyHitTraget is a HITtRAGET that has move and attack behaviours.
+/// </summary>
 public class EnemyHitTarget : HitTarget
 {
+    [SerializeField] float attackRate = 3f;
     [SerializeField] int hitsToDestroy = 1;
     [SerializeField] Transform playerTarget;
-    [SerializeField] float moveSpeed = 1f;
-    [SerializeField] float attackRate = 3f;
-
+   
     private int currentHits = 0;
+    [SerializeField] float moveSpeed=1f;
 
     protected void Awake()
     {
-        if (playerTarget == null)
-        {
-            playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
-        }
+        
     }
 
     protected override void Update()
     {
         base.Update();
         Move();
+        
     }
     protected override int CalculateScore()
     {
@@ -32,7 +33,7 @@ public class EnemyHitTarget : HitTarget
         return scoreGain;
     }
 
-    private void Move()
+    protected void Move()
     {
         if (playerTarget == null) return;
 
@@ -45,7 +46,8 @@ public class EnemyHitTarget : HitTarget
 
     private void Attack()
     {
-        Debug.Log(this.gameObject.name + " is Attacking Player",this.gameObject);
+
+        Debug.Log(gameObject.name+" is Attacking Player",gameObject);
     }
 
     public override void TakeHit(int hitpower)
@@ -59,11 +61,11 @@ public class EnemyHitTarget : HitTarget
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player"))
         {
             InvokeRepeating(nameof(Attack), 1f, attackRate);
         }
+        
 
     }
 }

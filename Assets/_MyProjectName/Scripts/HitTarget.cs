@@ -10,10 +10,12 @@ public class HitTarget : MonoBehaviour
     protected void Start()
     {
         //Update UI
-        if (gainScoreUI != null)
+        if (gainScoreUI == null)
         {
-            gainScoreUI.text = "";
-        }  
+            return;
+        }
+        gainScoreUI.text = "";
+          
     }
    
     protected virtual void Update()
@@ -29,7 +31,8 @@ public class HitTarget : MonoBehaviour
     public virtual void TakeHit(int hitpower)
     {
         int scoreGain = CalculateScore();
-        UpdateUI(scoreGain);
+        gainScoreUI.text=scoreGain.ToString();
+       
 
         gameObject.GetComponent<Collider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().useGravity = false;
@@ -37,14 +40,7 @@ public class HitTarget : MonoBehaviour
         Invoke(nameof(Destroy), 1f);
     }
 
-    private void UpdateUI(int gainScore)
-    {
-        //UpdateUI
-        if (gainScoreUI != null)
-        {
-            gainScoreUI.text = "+" + gainScore.ToString();
-        }
-    }
+  
 
     protected virtual void Destroy()
     {
