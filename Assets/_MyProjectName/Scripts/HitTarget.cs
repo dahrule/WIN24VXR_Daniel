@@ -4,50 +4,48 @@ using UnityEngine;
 public class HitTarget : MonoBehaviour
 {
     [SerializeField] protected int baseScore = 1;
-
     [SerializeField] protected TextMeshProUGUI gainScoreUI;
 
-    protected void Start()
+    private void Start()
     {
-        //Update UI
+        // Reset the gainScoreUI to an empty string at the start of the game.
         if (gainScoreUI == null)
         {
             return;
         }
         gainScoreUI.text = "";
-          
-    }
-   
-    protected virtual void Update()
-    {
-        TestHitTarget(); 
     }
 
-    protected virtual int CalculateScore()
+    // Moved this to a separate script for readability: MouseClicksToTestHits
+    /* protected virtual void Update()
+     {
+         TestHitTarget(); 
+     }*/
+
+    protected virtual int CalculateScore() // This method can be accessed and overridden in a child class because it has the protected and virtual modifiers respectively.
     {
         return baseScore;
     }
 
-    public virtual void TakeHit(int hitpower)
+    public virtual void TakeHit(int hitpower) // This method can be accessed and overridden in a child class because it has the public and virtual modifiers respectively.It can also be accessed by any class due to the public modifier.It can also be accessed by any class due to the public modifier.
     {
         int scoreGain = CalculateScore();
         gainScoreUI.text=scoreGain.ToString();
-       
 
+        // The following two lines are to avoid registering multiple hits while we wait for the object to be destroyed.
         gameObject.GetComponent<Collider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().useGravity = false;
 
         Invoke(nameof(Destroy), 1f);
     }
 
-  
-
-    protected virtual void Destroy()
+    protected virtual void Destroy() // This method can be accessed and overridden in a child class because it has the protected and virtual modifiers respectively.
     {
         Destroy(gameObject);
     }
 
-    private void TestHitTarget()
+    // Moved this to a separate script for readability: MouseClicksToTestHits
+    /*private void TestHitTarget()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -62,7 +60,7 @@ public class HitTarget : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
 }
 

@@ -5,27 +5,21 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
-/// An EnemyHitTraget is a HITtRAGET that has move and attack behaviours.
+/// An EnemyHitTarget is a HitTarget that has Move and Attack behaviours.
 /// </summary>
 public class EnemyHitTarget : HitTarget
 {
     [SerializeField] float attackRate = 3f;
+    [SerializeField] protected int attackDamage = 1;
     [SerializeField] int hitsToDestroy = 1;
-    [SerializeField] Transform playerTarget;
+    [SerializeField] public Transform playerTarget;
    
     private int currentHits = 0;
-    [SerializeField] float moveSpeed=1f;
+    [SerializeField] float moveSpeed = 1f;
 
-    protected void Awake()
+    protected virtual void Update()
     {
-        
-    }
-
-    protected override void Update()
-    {
-        base.Update();
         Move();
-        
     }
     protected override int CalculateScore()
     {
@@ -33,21 +27,18 @@ public class EnemyHitTarget : HitTarget
         return scoreGain;
     }
 
-    protected void Move()
+    protected virtual void Move()
     {
         if (playerTarget == null) return;
 
         // Move our position a step closer to the target.
         var step = moveSpeed * Time.deltaTime; // calculate distance to move
         transform.position = Vector3.MoveTowards(transform.position, playerTarget.position, step);
-
-        //TODO: fix jittering when reaching target, test if the distance is smaller than a stop distance.
     }
 
-    private void Attack()
+    protected virtual void Attack()
     {
-
-        Debug.Log(gameObject.name+" is Attacking Player",gameObject);
+        Debug.Log(gameObject.name+" is Attacking Player every " + attackRate + " seconds",gameObject);
     }
 
     public override void TakeHit(int hitpower)
@@ -65,7 +56,5 @@ public class EnemyHitTarget : HitTarget
         {
             InvokeRepeating(nameof(Attack), 1f, attackRate);
         }
-        
-
     }
 }

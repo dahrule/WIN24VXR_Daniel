@@ -150,7 +150,7 @@ MonoBehaviour:
   baseScore: 1
   gainScoreUI: {fileID: 4301801022150021667}
   attackRate: 3
-  hitsToDestroy: 1
+  hitsToDestroy: 2
   playerTarget: {fileID: 0}
   moveSpeed: 1
 --- !u!1 &3201477165397223796
