@@ -13,9 +13,11 @@ public class EnemyHitTarget : HitTarget
     [SerializeField] protected int attackDamage = 1;
     [SerializeField] int hitsToDestroy = 1;
     [SerializeField] public Transform playerTarget;
+
+    Coroutine attackCoroutine = null;
    
     private int currentHits = 0;
-    [SerializeField] float moveSpeed = 1f;
+    [SerializeField] protected float moveSpeed = 1f;
 
     protected virtual void Update()
     {
@@ -54,7 +56,33 @@ public class EnemyHitTarget : HitTarget
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            InvokeRepeating(nameof(Attack), 1f, attackRate);
+            //InvokeRepeating(nameof(Attack), 1f, attackRate);
+            attackCoroutine=StartCoroutine(AttackCoroutine());
         }
+    }
+
+    IEnumerator AttackCoroutine() 
+    {
+        WaitForSeconds waitTime = new(attackRate);
+        while(true)
+        {
+            Attack();
+            yield return waitTime;
+        }  
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("exited ");
+            if(attackCoroutine!=null) StopCoroutine(attackCoroutine);
+        }
+           
     }
 }

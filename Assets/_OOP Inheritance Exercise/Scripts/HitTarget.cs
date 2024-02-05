@@ -1,12 +1,12 @@
 using TMPro;
 using UnityEngine;
 
-public class HitTarget : MonoBehaviour
+public class HitTarget : MonoBehaviour, IHittable
 {
     [SerializeField] protected int baseScore = 1;
     [SerializeField] protected TextMeshProUGUI gainScoreUI;
 
-    private void Start()
+    protected virtual void Start()
     {
         // Reset the gainScoreUI to an empty string at the start of the game.
         if (gainScoreUI == null)

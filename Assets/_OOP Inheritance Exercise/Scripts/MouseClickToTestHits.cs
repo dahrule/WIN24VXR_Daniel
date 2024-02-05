@@ -18,7 +18,7 @@ public class MouseClickToTestHits : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.TryGetComponent<HitTarget>(out HitTarget hitTarget))
+                if (hit.collider.TryGetComponent<IHittable>(out IHittable hitTarget))
                 {
                     hitTarget.TakeHit(1);
                 }
