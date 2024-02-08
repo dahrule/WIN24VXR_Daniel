@@ -2600,6 +2600,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ControllerData",
+            "id": "ba706535-dfd5-4802-92f5-f3ed5c7e77aa",
+            "actions": [
+                {
+                    "name": "AngularVelocityRight",
+                    "type": "Value",
+                    "id": "4bf3fedf-c326-4f23-b445-6e666e06020c",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "VelocityRight",
+                    "type": "Button",
+                    "id": "eed02aec-5252-4583-ada7-9a031765e958",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cc5bf553-4f72-4fcc-ba3d-579b47dac0c3",
+                    "path": "<XRController>{RightHand}/{DeviceAngularVelocity}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AngularVelocityRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a3e22df9-5bfe-4ce0-a723-1a28b854674a",
+                    "path": "<XRController>{RightHand}/{DeviceVelocity}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VelocityRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
