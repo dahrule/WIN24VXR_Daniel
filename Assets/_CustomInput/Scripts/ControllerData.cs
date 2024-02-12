@@ -11,8 +11,8 @@ public class ControllerData : MonoBehaviour
      //public Vector3 angularVelocity;
      public Vector3 velocity;
 
-
-    public Vector3 AngularVelocity { private set; get; }
+    private Vector3 angularVelocity;
+    public Vector3 AngularVelocity { private set { angularVelocity = value; } get { return angularVelocity; } }
     
 
     // Update is called once per frame
