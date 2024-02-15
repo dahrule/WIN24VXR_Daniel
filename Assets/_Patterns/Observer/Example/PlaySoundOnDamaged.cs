@@ -34,7 +34,8 @@ namespace Examples.Observer
 
         private void OnDisable()
         {
-            ///TODO Unregister to events
+            _health.OnDamaged-= PlayDamageSound;
+            _health.OnKilled -= PlayKillSound;
         }
 
         void PlayDamageSound(int damage)
@@ -42,14 +43,16 @@ namespace Examples.Observer
             if(_damagedSound != null && _locationToPlay != null)
             {
                 AudioSource.PlayClipAtPoint(_damagedSound, _locationToPlay.position);
+                Debug.Log("Playing DamagedSound");
             }
         }
 
         void PlayKillSound()
         {
-            if (_damagedSound != null && _locationToPlay != null)
+            if (_killedSound != null && _locationToPlay != null)
             {
                 AudioSource.PlayClipAtPoint(_killedSound, _locationToPlay.position);
+                Debug.Log("Playing KilledSound");
             }
         }
     }

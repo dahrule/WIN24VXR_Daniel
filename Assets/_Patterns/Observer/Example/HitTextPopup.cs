@@ -27,19 +27,15 @@ namespace Examples.Observer
 
         private void OnEnable()
         {
-            
+            _health.OnDamaged += DisplayHitText;
+            _health.OnKilled += DisplayKilledText;
             
         }
         
 
-        public void StopObservingHealth()
-        {
-            
-        }
-
         void DisplayHitText(int damaged)
         {
-            string hitText = _hitText + " " + damaged.ToString();
+            string hitText = _hitText + " " + damaged.ToString();//creating a longer string using the hittext string and the interger value received from the event (damaged)
 
             if (_popupRoutine != null)
                 StopCoroutine(_popupRoutine);
@@ -58,7 +54,7 @@ namespace Examples.Observer
             if (_popupRoutine != null)
                 StopCoroutine(_popupRoutine);
             _popupRoutine = StartCoroutine(TextPopup(_killText));
-            StopObservingHealth();
+            
         }
     }
 }

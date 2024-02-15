@@ -27,12 +27,14 @@ namespace Examples.Observer
 
         private void OnEnable()
         {
-            // subscribe to get notified when this health takes damage!
+            //Subscribe to the events
+            Health.OnDamaged += DisplayDamage;
         }
 
         private void OnDisable()
         {
-            //Unsubscieb to the event      
+            //Unsubscribe to the events
+            Health.OnDamaged -= DisplayDamage;
         }
 
         void DisplayDamage(int damage)

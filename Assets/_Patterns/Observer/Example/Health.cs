@@ -60,7 +60,7 @@ namespace Examples.Observer
             //Reduce health
             CurrentHealth -= amount;
 
-            //Invoke OnDamaged event
+            //Invoke OnDamaged event only if it has listeners
             OnDamaged?.Invoke(amount);
 
             //if health is zero, call Kill function
