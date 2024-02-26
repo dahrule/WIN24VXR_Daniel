@@ -1,25 +1,31 @@
-﻿using Examples.ObjectPooling;
+﻿//#define OBJECT_POOL
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
 /// <summary>
-/// This class is a simple projectile that is the catalyst for triggering a Damaged event.
-/// This is also a fairly typical scenario of the type of way you may implement damage in your games.
+/// This class is a simple projectile 
 /// </summary>
-namespace Examples.Observer
+namespace Examples.ObjectPooling
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
     public class Projectile : MonoBehaviour
     {
         [SerializeField] float _travelSpeed = 5f;
-        [SerializeField] int _damage = 20;
+        private Rigidbody _rigidbody = null;
 
-        Rigidbody _rigidbody = null;
         private IObjectPool<Projectile> projectilePool;
 
+#if OBJECT_POOL
+        private IObjectPool<Projectile> projectilePool;
+        public void SetPool(IObjectPool<Projectile>pool)
+        {
+             projectilePool = pool; 
+        }
+#endif
         public void SetPool(IObjectPool<Projectile> pool)
         {
             projectilePool = pool;
@@ -41,13 +47,15 @@ namespace Examples.Observer
             rb.MovePosition(rb.position + moveOffset);
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnBecameInvisible()
         {
-            Health health = other.gameObject.GetComponent<Health>();
-            health.TakeDamage(_damage);
-
+            //Put projectile back into the pool
             projectilePool.Release(this);
+            #if OBJECT_POOL
+            projectilePool.Release(this);
+            #else
             //Destroy(gameObject); //TODO consider Object Pooling here
+            #endif
         }
     }
 }
