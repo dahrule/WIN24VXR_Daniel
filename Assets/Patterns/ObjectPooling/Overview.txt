@@ -1,0 +1,13 @@
+Object Pooling Pattern Definition
+Object pooling is a design pattern where a set of objects is created and initialized upfront to be reused instead of being instantiated and destroyed dynamically. 
+The pooled objects are kept in a "pool," and when needed, they are taken from the pool, used, and then returned to the pool for future reuse.
+
+Simplified - "Reuse objects instead of creating and destroying them on the fly."
+
+Why do we want to use it?
+We want to avoid the overhead of dynamic object creation and destruction, especially in performance-critical scenarios.
+Object pooling reduces memory allocations and deallocations, leading to better resource management and improved application performance.
+
+Common Examples
+Projectile instantiation in games, particle systems, and any scenario where the creation and destruction of objects are frequent and can impact performance. 
+Object pooling is employed to enhance efficiency by recycling and reusing existing objects rather than creating new ones each time.
